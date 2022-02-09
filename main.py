@@ -1,9 +1,14 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+import os
 from test import get_forecasts
+
+def getConfig(name: str):
+    return environ[name]
+
 # check for  new message from api -> polling
-updater = Updater(token="2033856374:AAF_HGxLZUAes3Yj41vhDhOUpw0r6oHTY5A")
+updater = Updater(token=os.getenv('API_KEY'))
 
 #allows to reginster handler -> command, text, video , audio etc
 dispatcher = updater.dispatcher
