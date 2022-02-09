@@ -10,14 +10,14 @@ dispatcher = updater.dispatcher
 
 # define a command callback funtion
 def start(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text = "hello nice to meet you wanna join our cult say 'vivek oraon is great' ")
+    context.bot.send_message(chat_id=update.message.chat_id, text = "hello nice to meet you.")
 # create a command handler 
 start_handler= CommandHandler("start",start)
 
 dispatcher.add_handler(start_handler)
 
 def echo(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text+"! madharchod, sanp ko pala tha") 
+    context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text) 
 
 echo_handler = MessageHandler(Filters.text, echo)
 
