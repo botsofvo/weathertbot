@@ -3,10 +3,6 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 import os
 from test import get_forecasts
-
-def getConfig(name: str):
-    return environ[name]
-
 # check for  new message from api -> polling
 updater = Updater(token=os.getenv('API_KEY'))
 
