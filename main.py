@@ -11,14 +11,14 @@ dispatcher = updater.dispatcher
 
 # define a command callback funtion
 def start(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text = "hello nice to meet you.")
+    context.bot.send_message(chat_id=update.message.chat_id, text = " Hello 🙋  nice to meet you, here are commands 🗒️ you can send me 🔺 and get the replys 🔻 as follows:\n1./location - Send your current location and I will send you 24hr forecast⛅.")
 # create a command handler 
 start_handler= CommandHandler("start",start)
 
 dispatcher.add_handler(start_handler)
 
 def echo(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text=update.message.text) 
+    context.bot.send_message(chat_id=update.message.chat_id, text="'"+update.message.text+"'\n- by "+update.message.from_user.name)
 
 echo_handler = MessageHandler(Filters.text, echo)
 
