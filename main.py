@@ -3,6 +3,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 import os
 from test import get_forecasts
+from createpage import pagecreator
 # check for  new message from api -> polling
 updater = Updater(token=os.getenv('API_KEY'))
 
@@ -50,7 +51,7 @@ def get_location(update, context):
     button = [
         [KeyboardButton("Share location", request_location=True)]
         ]
-    reply_markup = ReplyKeyboardMarkup(button)
+    reply_markup = ReplyKeyboardMarkup(button,"True","True")
     context.bot.send_message(chat_id=update.message.chat_id,
     text="Mind sharing location?",
     reply_markup=reply_markup)
@@ -62,9 +63,19 @@ def location(update, context):
     lat = update.message.location.latitude
     lon = update.message.location.longitude
     forecasts = get_forecasts(lat, lon)
-    context.bot.send_message(chat_id=update.message.chat_id,
-    text=forecasts,
-    reply_markup= ReplyKeyboardRemove())
+    data= f'''<br>{forecasts}<br>'''
+    pagelink=pagecreator(data)
+    button1= [[InlineKeyboardButton(text="click here",url=pagelink)]]
+    reply_markup1 = InlineKeyboardMarkup(button1)
+    # f=open("animated_sticker.tgs", 'rb')
+    context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1,parse_mode='html')
+    # context.bot.send_message(chat_id=update.message.chat_id,text="😊Thanks for using....\n 👀See menu button for more commands",
+    #                          reply_markup=ReplyKeyboardRemove())
+    context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgUAAxkBAAED7ctiCoQrncbFSOtIw46b_5dFjvHEMQACAwAD5UvxN-gmo43ymUmCIwQ", reply_markup=ReplyKeyboardRemove())
+    # context.bot.send_message(chat_id=update.message.chat_id,
+    #                          text=forecasts,
+    #                          reply_markup=ReplyKeyboardRemove())
+
 
 location_handler = MessageHandler(Filters.location, location)
 dispatcher.add_handler(location_handler) 
