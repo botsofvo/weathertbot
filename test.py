@@ -35,18 +35,16 @@ def get_forecasts(lat, lon):
         temp_min = temperature.get("temp_min")
         temp_max = temperature.get("temp_max")
         time = timeformater(time)
+        current_loc=f"<br>🛩️<b>Your current location information:</b> <br><br> 🌏Location : {loc_name} <br> 🌐lat : {loc_lat} <br> 🌐lon : {loc_lon} <br>"
 
-        results.append("""\n📅 {}\n
-        🌏Location : {} 
-        🌐lat : {} 
-        🌐lon : {} 
-        ☔Status: {}
-        🍃Detailed: {}
-        🌡️Temperature: {}°c
-        📉Min temperature: {}°c
-        📈Max temperature: {}°c""" .format(time, loc_name, loc_lat, loc_lon, status, detailed, temp, temp_min, temp_max))
+        results.append("""<br>📅 {}<br>
+        ☔Status: {} <br>
+        ☁️Detailed: {} <br>
+        🌡️Temperature: {}°c <br>
+        📉Min temperature: {}°c <br>
+        📈Max temperature: {}°c <br>""" .format(time, status, detailed, temp, temp_min, temp_max))
 
-    return "\n".join(results[:10])
+    return current_loc+"<br><b>        24 hour forecast:</b><br>"+"<br>".join(results[:10])
 
 
 if __name__ == "__main__":
