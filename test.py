@@ -1,7 +1,8 @@
 from pyowm import OWM
+import os
 from datetime import datetime
 
-owm = OWM("aa3cc8fac5c1e127a6174ac9b0ef8932")
+owm = OWM(os.getenv('OWM_API_KEY'))
 
 mgr = owm.weather_manager()
 
@@ -23,7 +24,6 @@ def get_forecasts(lat, lon):
     loc_name = location.name
     loc_lat = location.lat
     loc_lon = location.lon
-
     results = []
 
     for forecast in forecasts:
@@ -31,21 +31,16 @@ def get_forecasts(lat, lon):
         status = forecast.status
         detailed = forecast.detailed_status
         temperature = forecast.temperature("celsius")
-        temp = temperature.get("temp")
+        # temp = temperature.get("temp")
         temp_min = temperature.get("temp_min")
         temp_max = temperature.get("temp_max")
         time = timeformater(time)
-        current_loc=f"<br>🛩️<b>Your current location information:</b> <br><br> 🌏Location : {loc_name} <br> 🌐lat : {loc_lat} <br> 🌐lon : {loc_lon} <br>"
+        current_loc=f"<br>🛩️<b>Your current location information:</b> <br><br> 🌏Location : {loc_name} <br> 🌐latitude : {loc_lat} <br> 🌐longitude : {loc_lon} <br>"
 
         results.append("""<br>📅 {}<br>
         ☔Status: {} <br>
         ☁️Detailed: {} <br>
-        🌡️Temperature: {}°c <br>
-        📉Min temperature: {}°c <br>
-        📈Max temperature: {}°c <br>""" .format(time, status, detailed, temp, temp_min, temp_max))
+        📉Min temperature: {}°C <br>
+        📈Max temperature: {}°C <br>""" .format(time, status, detailed, temp_min, temp_max))
 
-    return current_loc+"<br><b>        24 hour forecast:</b><br>"+"<br>".join(results[:10])
-
-
-if __name__ == "__main__":
-    print(get_forecasts(-1.2, 36))
+    return current_loc+"<br><b>24 hour forecast:</b><br>"+"<br>".join(results[:10])
