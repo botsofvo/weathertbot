@@ -39,10 +39,10 @@ def location(update, context):
     forecasts = get_forecasts(lat, lon)
     data= f'''<br>{forecasts}<br>'''
     pagelink=pagecreator(data)
-    button1= [[InlineKeyboardButton(text="click here",url=pagelink)]]
+    button1= [[InlineKeyboardButton(text="click here and read",url=pagelink)]]
     reply_markup1 = InlineKeyboardMarkup(button1)
     context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1,parse_mode='html')
-    context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgUAAxkBAAED7ctiCoQrncbFSOtIw46b_5dFjvHEMQACAwAD5UvxN-gmo43ymUmCIwQ", reply_markup=ReplyKeyboardRemove())
+    context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgQAAxkBAAED8wxiDMYs52Ehx8uqh76tV-JocYlmqwAC5QADZprbKvN4A462THgxIwQ", reply_markup=ReplyKeyboardRemove())
 try:
     location_handler = MessageHandler(Filters.location, location)
 except :
@@ -51,4 +51,4 @@ except :
 dispatcher.add_handler(location_handler) 
 dispatcher.add_handler(echo_handler)
 
-updater.start_polling()
+updater.start_polling(1)
