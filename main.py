@@ -7,6 +7,8 @@ from createpage import pagecreator
 
 updater = Updater(token=os.getenv('API_KEY'))
 
+updater.start_polling()
+
 dispatcher = updater.dispatcher
 
 def start(update, context):
