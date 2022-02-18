@@ -46,7 +46,7 @@ def location(update, context):
 location_handler = MessageHandler(Filters.location, location)
 try:
     dispatcher.add_handler(location_handler)
- except:
+except:
     dispatcher.add_handler(location_handler)
 # dispatcher.add_handler(echo_handler)
 try:
