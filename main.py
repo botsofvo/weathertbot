@@ -15,10 +15,10 @@ start_handler= CommandHandler("start",start)
 
 dispatcher.add_handler(start_handler)
 
-def echo(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text="'"+update.message.text+"'\n- by "+update.message.from_user.name)
+# def echo(update, context):
+#     context.bot.send_message(chat_id=update.message.chat_id, text="'"+update.message.text+"'\n- by "+update.message.from_user.name)
 
-echo_handler = MessageHandler(Filters.text, echo)
+# echo_handler = MessageHandler(Filters.text, echo)
 
 def get_location(update, context):
     button = [
@@ -43,12 +43,13 @@ def location(update, context):
     reply_markup1 = InlineKeyboardMarkup(button1)
     context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1,parse_mode='html')
     context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgQAAxkBAAED8wxiDMYs52Ehx8uqh76tV-JocYlmqwAC5QADZprbKvN4A462THgxIwQ", reply_markup=ReplyKeyboardRemove())
+location_handler = MessageHandler(Filters.location, location)
 try:
-    location_handler = MessageHandler(Filters.location, location)
-except :
-    print("I dont know want what happen it seems there is some problem in this code pls fix me😢")
-    
-dispatcher.add_handler(location_handler) 
-dispatcher.add_handler(echo_handler)
-
-updater.start_polling(1)
+    dispatcher.add_handler(location_handler)
+ except:
+    dispatcher.add_handler(location_handler)
+# dispatcher.add_handler(echo_handler)
+try:
+    updater.start_polling()
+except:
+    updater.start_polling()
