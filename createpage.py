@@ -1,8 +1,8 @@
 from telegraph import Telegraph
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 telegraph = Telegraph(os.getenv('TELEGRAPH_API_KEY'))
 
 def pagecreator(data):

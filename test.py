@@ -1,9 +1,9 @@
 from pyowm import OWM
 import os
 from datetime import datetime
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 owm = OWM(os.getenv('OWM_API_KEY'))
 

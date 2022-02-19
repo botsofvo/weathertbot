@@ -5,9 +5,9 @@ import os
 from test import get_forecasts
 from createpage import pagecreator
 import time
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 updater = Updater(token=os.getenv('API_KEY'))
 
