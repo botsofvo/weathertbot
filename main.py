@@ -37,11 +37,15 @@ def location(update, context):
     pagelink=f'https://telegra.ph/{pagepath}'
     button1= [[InlineKeyboardButton(text="click here and read",url=pagelink)]]
     reply_markup1 = InlineKeyboardMarkup(button1)
-    try:
-        context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1,parse_mode='html')
-        context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgQAAxkBAAED8wxiDMYs52Ehx8uqh76tV-JocYlmqwAC5QADZprbKvN4A462THgxIwQ", reply_markup=ReplyKeyboardRemove())
-    except:
-        location(update, context)
+    context.bot.send_message(chat_id=update.message.chat_id,text="loading..... pls wait", reply_markup=reply_markup1)
+    while True:
+        try:
+            context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1)
+            context.bot.send_sticker(chat_id=update.message.chat_id, sticker="CAACAgQAAxkBAAED8wxiDMYs52Ehx8uqh76tV-JocYlmqwAC5QADZprbKvN4A462THgxIwQ", reply_markup=ReplyKeyboardRemove())
+            break
+        except  Exception as e:
+            time.sleep(1)
+            location(update, context)
 
         # context.bot.send_message(chat_id=update.message.chat_id,text="opps! something went wrong please try again")
 
@@ -55,6 +59,6 @@ dispatcher.add_handler(get_location_handler)
 dispatcher.add_handler(location_handler)
 dispatcher.add_handler(echo_handler)
 
-updater.start_polling(drop_pending_updates=False)
+updater.start_polling(Timeout=30,drop_pending_updates=False)
 
 updater.idle()
