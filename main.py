@@ -59,6 +59,6 @@ dispatcher.add_handler(get_location_handler)
 dispatcher.add_handler(location_handler)
 dispatcher.add_handler(echo_handler)
 
-updater.start_polling(Timeout=30,drop_pending_updates=False)
+updater.start_polling(timeout=30,drop_pending_updates=False)
 
 updater.idle()
