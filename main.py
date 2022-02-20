@@ -33,11 +33,16 @@ def location(update, context):
     lon = update.message.location.longitude
     forecasts = get_forecasts(lat, lon)
     data= f'''{forecasts}'''
-    pagepath=pagecreator(data)
+    while True:
+        try:
+            context.bot.send_message(chat_id=update.message.chat_id,text="loading..... pls wait")
+            pagepath=pagecreator(data)
+            break
+        except:
+            pagepath=pagecreator(data)
     pagelink=f'https://telegra.ph/{pagepath}'
     button1= [[InlineKeyboardButton(text="click here and read",url=pagelink)]]
     reply_markup1 = InlineKeyboardMarkup(button1)
-    context.bot.send_message(chat_id=update.message.chat_id,text="loading..... pls wait")
     while True:
         try:
             context.bot.send_message(chat_id=update.message.chat_id,text="😃 Here is your weather forecast:", reply_markup=reply_markup1)
@@ -60,6 +65,6 @@ dispatcher.add_handler(get_location_handler)
 dispatcher.add_handler(location_handler)
 dispatcher.add_handler(echo_handler)
 
-updater.start_polling(timeout=30,drop_pending_updates=False)
+updater.start_polling(read_latency=0.1,timeout=5,drop_pending_updates=False)
 
-updater.idle()
+# updater.idle()

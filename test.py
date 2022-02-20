@@ -24,9 +24,10 @@ def get_forecasts(lat, lon):
     forecasts = observation.forecast
     location = forecasts.location
     loc_name = location.name
+    country_code=location.country
     loc_lat = location.lat
     loc_lon = location.lon
-    current_loc=f"<br>🛩️<b>Your current location information:</b> <br><img src='https://source.unsplash.com/300x200/?{loc_name}' alt='city'><br> 🌏Location : {loc_name}<br> 🌐latitude : {loc_lat} <br> 🌐longitude : {loc_lon} <br>"
+    current_loc=f"<br>🛩️<b>Your current location information:</b> <br><img src='https://source.unsplash.com/300x200/?{loc_name},india' alt='city'><br> 🌏Location : {loc_name},{country_code}<br> 🌐latitude : {loc_lat} <br> 🌐longitude : {loc_lon} <br>"
     results = []
 
     for forecast in forecasts:
