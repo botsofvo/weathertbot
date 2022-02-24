@@ -35,7 +35,7 @@ def location(update, context):
     data= f'''{forecasts}'''
     while True:
         try:
-            context.bot.send_message(chat_id=update.message.chat_id,text="loading..... pls wait")
+            # context.bot.send_message(chat_id=update.message.chat_id,text="loading..... pls wait")
             pagepath=pagecreator(data)
             break
         except:
